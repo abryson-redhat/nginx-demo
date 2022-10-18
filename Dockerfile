@@ -10,7 +10,7 @@ ADD test-app/nginx-cfg/nginx.conf "${NGINX_CONF_PATH}"
 #ADD test-app/nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
 #ADD test-app/*.html .
 
-CHOWN -R 1001:0 ./test-app
+#CHOWN -R 1001:0 ./test-app
 
 USER 1001
 
