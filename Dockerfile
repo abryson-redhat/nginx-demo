@@ -6,9 +6,9 @@ USER root
 
 # Add application sources
 ADD test-app/nginx-cfg/nginx.conf "${NGINX_CONF_PATH}"
-ADD test-app/nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
-ADD test-app/nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
-ADD test-app/*.html .
+#ADD test-app/nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
+#ADD test-app/nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
+#ADD test-app/*.html .
 
 CHOWN -R 1001:0 ./test-app
 
