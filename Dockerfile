@@ -2,6 +2,8 @@ FROM registry.access.redhat.com/ubi9/nginx-120
 
 ENV NGINX_VERSION=1.20
 
+USER root
+
 # Add application sources
 ADD test-app/nginx.conf "${NGINX_CONF_PATH}"
 ADD test-app/nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
