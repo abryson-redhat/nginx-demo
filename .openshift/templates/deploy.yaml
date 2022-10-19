@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/vcs-ref: main
+    app.openshift.io/vcs-uri: git@github.com:abryson-redhat/nginx-demo.git
+    deployment.kubernetes.io/revision: "10"
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"nginx-demo:latest","namespace":"wabtec"},"fieldPath":"spec.template.spec.containers[?(@.name==\"nginx-demo\")].image","pause":"false"}]'
+    openshift.io/generated-by: OpenShiftWebConsole
+  labels:
+    app: nginx-demo
+    app.kubernetes.io/component: nginx-demo
+    app.kubernetes.io/instance: nginx-demo
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/part-of: nginx
+    app.openshift.io/runtime: nginx
+    app.openshift.io/runtime-version: 1.18-ubi7
+  name: nginx-demo
+  namespace: wabtec
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: nginx-demo
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx-demo
+        deploymentconfig: nginx-demo
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/wabtec/nginx-demo@sha256:648a5d1149eeadf8a9650a38f68be6801586bfac29d39f239d06743f804cad16
+        imagePullPolicy: Always
+        name: nginx-demo
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/x509/https
+          name: sso-x509-https-secret
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: sso-x509-https-secret
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: sso-x509-https-secret
