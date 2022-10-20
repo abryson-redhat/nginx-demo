@@ -15,4 +15,4 @@ ADD test-app/nginx-cfg/nginx.conf "${NGINX_CONF_PATH}"
 USER 1001
 
 # Run script uses standard ways to run the application
-CMD nginx -g "daemon off;"
+CMD nginx -V -g "daemon off;"
