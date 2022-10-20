@@ -52,6 +52,8 @@ spec:
         volumeMounts:
         - mountPath: /etc/x509/https
           name: sso-x509-https-secret
+        - mountPath: /etc/x509/https
+          name: sso-x509-https-secret-wabtec2
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -63,3 +65,8 @@ spec:
           defaultMode: 420
           optional: true
           secretName: sso-x509-https-secret
+      - name: sso-x509-https-secret-wabtec2
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: sso-x509-https-secret-wabtec2
