@@ -1,0 +1,6 @@
+---
+nginx:
+  namespace:
+    label: nginx-demo
+    description: "nginx ha demo"
+    displayName: "nginx ha demo"

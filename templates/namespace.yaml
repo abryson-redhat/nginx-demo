@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: {{ .Values.nginx.namespace.description }}
+    openshift.io/display-name: {{ .Values.nginx.namespace.displayName }}
+    openshift.io/requester: opentlc-mgr
+    openshift.io/sa.scc.mcs: s0:c26,c5
+    openshift.io/sa.scc.supplemental-groups: 1000660000/10000
+    openshift.io/sa.scc.uid-range: 1000660000/10000
+  labels:
+    kubernetes.io/metadata.name: {{ .Values.nginx.namespace.label }}
+    app.kubernetes.io/managed-by: Helm
+  name: {{ .Values.nginx.namespace.label }}
+spec:
+  finalizers:
+  - kubernetes
