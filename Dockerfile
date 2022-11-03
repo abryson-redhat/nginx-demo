@@ -6,6 +6,7 @@ USER root
 
 # Add application sources
 ADD test-app/nginx-cfg/nginx.conf "${NGINX_CONF_PATH}"
+ADD certs/* /etc/x509/https/
 #ADD test-app/nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
 #ADD test-app/nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
 #ADD test-app/*.html .
